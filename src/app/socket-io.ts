@@ -75,7 +75,7 @@ export class SocketIO {
   }
 
   private static middleware(): void {
-    SocketIO.io.use(async function (socket: Socket, next) {
+    SocketIO.io.use(async function(socket: Socket, next) {
       try {
         if (socket.handshake.query.user) {
           const userTokenData = (await jwt.verify(socket.handshake.query.user, environment.authentication.key)) as IDecodedToken;

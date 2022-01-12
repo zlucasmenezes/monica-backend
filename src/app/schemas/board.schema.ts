@@ -22,7 +22,7 @@ const BoardSchema = new Schema<IBoard>(
   }
 );
 
-BoardSchema.statics.generateAuthToken = async function (this: IBoardModel, boardId: string, password: string): Promise<IBoardEncodedToken> {
+BoardSchema.statics.generateAuthToken = async function(this: IBoardModel, boardId: string, password: string): Promise<IBoardEncodedToken> {
   const board = await this.findById(boardId);
   if (!board) {
     return Promise.reject(new Error('Board not found'));
@@ -42,7 +42,7 @@ BoardSchema.statics.generateAuthToken = async function (this: IBoardModel, board
   return Promise.resolve<IBoardEncodedToken>(encodedTokenData);
 };
 
-BoardSchema.statics.createBoard = async function (this: IBoardModel, thing: IThing['_id']): Promise<IBoard> {
+BoardSchema.statics.createBoard = async function(this: IBoardModel, thing: IThing['_id']): Promise<IBoard> {
   try {
     const board = new Board({ _id: thing, password: PasswordUtils.generate(16, 'aA0!') });
     return await board.save();

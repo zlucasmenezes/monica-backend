@@ -66,11 +66,11 @@ const RelaySchema = new Schema<IRelay>(
   }
 );
 
-RelaySchema.methods.isFromThing = function (this: IRelay, thingId: IThing['_id']): boolean {
+RelaySchema.methods.isFromThing = function(this: IRelay, thingId: IThing['_id']): boolean {
   return String(this.thing) === String(thingId);
 };
 
-RelaySchema.statics.findByIdAndPopulate = async function (this: IRelayModel, relayId: string) {
+RelaySchema.statics.findByIdAndPopulate = async function(this: IRelayModel, relayId: string) {
   return this.findById(relayId)
     .populate([
       {
@@ -95,7 +95,7 @@ RelaySchema.statics.findByIdAndPopulate = async function (this: IRelayModel, rel
     .exec();
 };
 
-RelaySchema.statics.findByThingAndPopulate = async function (this: IRelayModel, thingId: string) {
+RelaySchema.statics.findByThingAndPopulate = async function(this: IRelayModel, thingId: string) {
   return this.find({ thing: thingId })
     .populate([
       {
@@ -120,7 +120,7 @@ RelaySchema.statics.findByThingAndPopulate = async function (this: IRelayModel, 
     .exec();
 };
 
-RelaySchema.statics.findByThing = async function (this: IRelayModel, thingId: string) {
+RelaySchema.statics.findByThing = async function(this: IRelayModel, thingId: string) {
   return this.find({ thing: thingId });
 };
 

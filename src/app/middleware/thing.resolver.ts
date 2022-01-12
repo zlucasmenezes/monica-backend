@@ -15,7 +15,7 @@ class ThingResolver {
 
       const updates: Query<ISensor | IRelay>[] = [];
 
-      const updateDevices = async (devices: (IRelay | ISensor)[], model: Model<IRelaySchema | ISensorSchema>) => {
+      const updateDevices = async(devices: (IRelay | ISensor)[], model: Model<IRelaySchema | ISensorSchema>) => {
         for (const device of devices) {
           if (!device.upcomingChanges) {
             continue;

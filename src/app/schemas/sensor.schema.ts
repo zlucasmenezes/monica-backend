@@ -99,11 +99,11 @@ const SensorSchema = new Schema<ISensor>(
   }
 );
 
-SensorSchema.methods.isFromThing = function (this: ISensor, thingId: IThing['_id']): boolean {
+SensorSchema.methods.isFromThing = function(this: ISensor, thingId: IThing['_id']): boolean {
   return String(this.thing) === String(thingId);
 };
 
-SensorSchema.statics.findByIdAndPopulate = async function (this: ISensorModel, sensorId: string) {
+SensorSchema.statics.findByIdAndPopulate = async function(this: ISensorModel, sensorId: string) {
   return this.findById(sensorId)
     .populate([
       {
@@ -132,7 +132,7 @@ SensorSchema.statics.findByIdAndPopulate = async function (this: ISensorModel, s
     .exec();
 };
 
-SensorSchema.statics.findByThingAndPopulate = async function (this: ISensorModel, thingId: string) {
+SensorSchema.statics.findByThingAndPopulate = async function(this: ISensorModel, thingId: string) {
   return this.find({ thing: thingId })
     .populate([
       {
@@ -161,7 +161,7 @@ SensorSchema.statics.findByThingAndPopulate = async function (this: ISensorModel
     .exec();
 };
 
-SensorSchema.statics.findByThing = async function (this: ISensorModel, thingId: string) {
+SensorSchema.statics.findByThing = async function(this: ISensorModel, thingId: string) {
   return this.find({ thing: thingId });
 };
 

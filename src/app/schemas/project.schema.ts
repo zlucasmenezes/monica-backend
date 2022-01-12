@@ -37,12 +37,12 @@ const ProjectSchema = new Schema<IProject>(
   }
 );
 
-ProjectSchema.methods.isAdmin = function (this: IProject, userId: IUser['_id']): boolean {
-  // tslint:disable-next-line: triple-equals
+ProjectSchema.methods.isAdmin = function(this: IProject, userId: IUser['_id']): boolean {
+  // eslint-disable-next-line eqeqeq
   return this.admin == userId;
 };
 
-ProjectSchema.methods.isUser = function (this: IProject, userId: IUser['_id']): boolean {
+ProjectSchema.methods.isUser = function(this: IProject, userId: IUser['_id']): boolean {
   if (this.isAdmin(userId)) {
     return true;
   }
@@ -54,11 +54,11 @@ ProjectSchema.methods.isUser = function (this: IProject, userId: IUser['_id']): 
   return this.users.includes(userId);
 };
 
-ProjectSchema.statics.findByIdAndPopulate = async function (this: IProjectModel, projectId: string) {
+ProjectSchema.statics.findByIdAndPopulate = async function(this: IProjectModel, projectId: string) {
   return this.findById(projectId).populate('admin').populate('users').exec();
 };
 
-ProjectSchema.statics.findByUserAndPopulate = async function (this: IProjectModel, userId: IUser['_id']) {
+ProjectSchema.statics.findByUserAndPopulate = async function(this: IProjectModel, userId: IUser['_id']) {
   return this.find({
     $or: [{ admin: userId }, { users: userId }, { privacy: 'public' }],
   })
@@ -67,7 +67,7 @@ ProjectSchema.statics.findByUserAndPopulate = async function (this: IProjectMode
     .exec();
 };
 
-ProjectSchema.statics.findByUser = async function (this: IProjectModel, userId: IUser['_id']) {
+ProjectSchema.statics.findByUser = async function(this: IProjectModel, userId: IUser['_id']) {
   return this.find({
     $or: [{ admin: userId }, { users: userId }, { privacy: 'public' }],
   });

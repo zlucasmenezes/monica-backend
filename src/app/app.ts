@@ -52,7 +52,7 @@ class App {
     mongoose.connection.on('connected', () => console.warn('[MONGODB] Connected to database'));
     mongoose.connection.on('connecting', () => console.info('[MONGODB] Connecting to database'));
 
-    const connect = async (attempt: number = 1, maximumNumberOfAttempts: number = Infinity): Promise<boolean> => {
+    const connect = async(attempt: number = 1, maximumNumberOfAttempts: number = Infinity): Promise<boolean> => {
       try {
         await mongoose.connect(
           `${this.environment.database.prefix}://${this.environment.database.user}:${this.environment.database.pwd}@${

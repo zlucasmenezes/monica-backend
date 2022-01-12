@@ -43,15 +43,15 @@ const UserSchema = new Schema<IUser>(
   }
 );
 
-UserSchema.virtual('fullName').get(function (this: IUser): string {
+UserSchema.virtual('fullName').get(function(this: IUser): string {
   return `${this.firstName} ${this.lastName}`;
 });
 
-UserSchema.methods.getEmail = function (this: IUser): string {
+UserSchema.methods.getEmail = function(this: IUser): string {
   return `"${this.fullName}" <${this.email}>`;
 };
 
-UserSchema.pre<IUser>('save', async function (this: IUser, next: HookNextFunction) {
+UserSchema.pre<IUser>('save', async function(this: IUser, next: HookNextFunction) {
   if (this.isModified('password')) {
     if (this.isNew) {
       this.password = await bcrypt.hash(this.password, await bcrypt.genSalt());
@@ -60,7 +60,7 @@ UserSchema.pre<IUser>('save', async function (this: IUser, next: HookNextFunctio
   }
 });
 
-UserSchema.statics.generateAuthToken = async function (this: IUserModel, username: string, password: string): Promise<IEncodedToken> {
+UserSchema.statics.generateAuthToken = async function(this: IUserModel, username: string, password: string): Promise<IEncodedToken> {
   const user = await this.findOne({ username });
   if (!user) {
     return Promise.reject(new Error('User not found'));

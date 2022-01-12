@@ -27,12 +27,12 @@ const ThingSchema = new Schema<IThing>(
   }
 );
 
-ThingSchema.methods.isFromProject = function (this: IThing, projectId: IProject['_id']): boolean {
-  // tslint:disable-next-line: triple-equals
+ThingSchema.methods.isFromProject = function(this: IThing, projectId: IProject['_id']): boolean {
+  // eslint-disable-next-line eqeqeq
   return this.project == projectId;
 };
 
-ThingSchema.statics.findByIdAndPopulate = async function (this: IThingModel, thingId: string) {
+ThingSchema.statics.findByIdAndPopulate = async function(this: IThingModel, thingId: string) {
   return this.findById(thingId)
     .populate({
       path: 'project',
@@ -51,7 +51,7 @@ ThingSchema.statics.findByIdAndPopulate = async function (this: IThingModel, thi
     .exec();
 };
 
-ThingSchema.statics.findByProjectAndPopulate = async function (this: IThingModel, projectId: string) {
+ThingSchema.statics.findByProjectAndPopulate = async function(this: IThingModel, projectId: string) {
   return this.find({ project: projectId })
     .populate({
       path: 'project',
@@ -70,11 +70,11 @@ ThingSchema.statics.findByProjectAndPopulate = async function (this: IThingModel
     .exec();
 };
 
-ThingSchema.statics.findByProject = async function (this: IThingModel, projectId: string) {
+ThingSchema.statics.findByProject = async function(this: IThingModel, projectId: string) {
   return this.find({ project: projectId });
 };
 
-ThingSchema.statics.getTypes = async function (this: IThingModel, projectId: string) {
+ThingSchema.statics.getTypes = async function(this: IThingModel, projectId: string) {
   const types = await this.find({ project: projectId }, { _id: false, type: true }).lean().exec();
   return [...new Set(types.map((type: { type: string }) => type.type))];
 };
